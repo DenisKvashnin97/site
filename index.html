@@ -1,0 +1,1056 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Режиссёр монтажа — Премиальное портфолио</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Manrope:wght@500;700;800&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #070707;
+      --bg-2: #0f1012;
+      --panel: rgba(255,255,255,0.05);
+      --panel-2: rgba(255,255,255,0.03);
+      --line: rgba(255,255,255,0.10);
+      --text: #f5f3ee;
+      --muted: #b8b1a8;
+      --gold: #d6b06b;
+      --gold-soft: rgba(214,176,107,0.16);
+      --white-soft: rgba(255,255,255,0.72);
+      --shadow: 0 20px 70px rgba(0,0,0,0.45);
+      --radius-xl: 32px;
+      --radius-lg: 22px;
+      --radius-md: 18px;
+      --max: 1240px;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: Inter, system-ui, sans-serif;
+      color: var(--text);
+      background:
+        radial-gradient(circle at top left, rgba(214,176,107,0.11), transparent 28%),
+        radial-gradient(circle at 85% 15%, rgba(255,255,255,0.08), transparent 18%),
+        linear-gradient(180deg, #040404 0%, #0a0a0b 35%, #111214 100%);
+      line-height: 1.55;
+      overflow-x: hidden;
+    }
+
+    body::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      background-image:
+        linear-gradient(rgba(255,255,255,0.015) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255,255,255,0.015) 1px, transparent 1px);
+      background-size: 40px 40px;
+      mask-image: radial-gradient(circle at center, black 40%, transparent 85%);
+      opacity: 0.45;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    button,
+    input,
+    textarea {
+      font: inherit;
+    }
+
+    .container {
+      width: min(calc(100% - 32px), var(--max));
+      margin: 0 auto;
+    }
+
+    .section {
+      padding: 110px 0;
+      position: relative;
+    }
+
+    .section-label {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      padding: 8px 14px;
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      background: rgba(255,255,255,0.03);
+      color: var(--white-soft);
+      font-size: 0.88rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      margin-bottom: 20px;
+    }
+
+    .section-label::before {
+      content: "";
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: var(--gold);
+      box-shadow: 0 0 20px rgba(214,176,107,0.6);
+    }
+
+    .section-title {
+      font-family: Manrope, Inter, sans-serif;
+      font-size: clamp(2rem, 4vw, 4rem);
+      line-height: 1.05;
+      letter-spacing: -0.03em;
+      max-width: 900px;
+      margin-bottom: 18px;
+    }
+
+    .section-subtitle {
+      color: var(--muted);
+      font-size: 1.04rem;
+      max-width: 760px;
+    }
+
+    .site-header {
+      position: sticky;
+      top: 0;
+      z-index: 60;
+      backdrop-filter: blur(18px);
+      background: rgba(6,6,7,0.65);
+      border-bottom: 1px solid rgba(255,255,255,0.06);
+    }
+
+    .site-header__inner {
+      min-height: 82px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 24px;
+    }
+
+    .logo {
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+    }
+
+    .logo strong {
+      font-family: Manrope, sans-serif;
+      font-size: 1.05rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+    }
+
+    .logo span {
+      color: var(--muted);
+      font-size: 0.8rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    .nav {
+      display: flex;
+      align-items: center;
+      gap: 24px;
+    }
+
+    .nav a {
+      color: var(--white-soft);
+      font-size: 0.96rem;
+      transition: 0.25s ease;
+    }
+
+    .nav a:hover {
+      color: var(--text);
+    }
+
+    .menu-btn {
+      display: none;
+      border: 1px solid var(--line);
+      background: rgba(255,255,255,0.03);
+      color: var(--text);
+      padding: 10px 14px;
+      border-radius: 12px;
+      cursor: pointer;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      border-radius: 999px;
+      padding: 14px 22px;
+      border: 1px solid transparent;
+      font-weight: 600;
+      transition: 0.3s ease;
+      cursor: pointer;
+    }
+
+    .btn:hover {
+      transform: translateY(-2px);
+    }
+
+    .btn-gold {
+      background: linear-gradient(135deg, #f0d39e 0%, #d6b06b 55%, #b78946 100%);
+      color: #17120b;
+      box-shadow: 0 12px 35px rgba(214,176,107,0.25);
+    }
+
+    .btn-dark {
+      background: rgba(255,255,255,0.04);
+      border-color: var(--line);
+      color: var(--text);
+    }
+
+    .hero {
+      padding: 96px 0 80px;
+    }
+
+    .hero-grid {
+      display: grid;
+      grid-template-columns: minmax(0, 1.15fr) minmax(360px, 0.85fr);
+      gap: 34px;
+      align-items: stretch;
+    }
+
+    .hero-copy {
+      padding: 22px 0 10px;
+    }
+
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 12px;
+      padding: 9px 15px;
+      margin-bottom: 20px;
+      border-radius: 999px;
+      background: var(--gold-soft);
+      border: 1px solid rgba(214,176,107,0.26);
+      color: #ecd6ae;
+      font-size: 0.9rem;
+    }
+
+    .hero-title {
+      font-family: Manrope, sans-serif;
+      font-size: clamp(2.8rem, 6vw, 6.2rem);
+      line-height: 0.95;
+      letter-spacing: -0.05em;
+      margin-bottom: 18px;
+      max-width: 900px;
+    }
+
+    .hero-title .accent {
+      color: var(--gold);
+      display: block;
+    }
+
+    .hero-text {
+      color: var(--muted);
+      font-size: 1.08rem;
+      max-width: 700px;
+      margin-bottom: 30px;
+    }
+
+    .hero-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 14px;
+      margin-bottom: 36px;
+    }
+
+    .hero-card {
+      position: relative;
+      min-height: 100%;
+      border-radius: 34px;
+      background:
+        linear-gradient(180deg, rgba(255,255,255,0.08), rgba(255,255,255,0.03)),
+        linear-gradient(145deg, rgba(214,176,107,0.08), rgba(255,255,255,0.01));
+      border: 1px solid rgba(255,255,255,0.08);
+      padding: 22px;
+      box-shadow: var(--shadow);
+      overflow: hidden;
+    }
+
+    .hero-card::after {
+      content: "";
+      position: absolute;
+      inset: auto -15% -30% auto;
+      width: 280px;
+      height: 280px;
+      background: radial-gradient(circle, rgba(214,176,107,0.18), transparent 65%);
+      filter: blur(10px);
+    }
+
+    .preview-frame {
+      position: relative;
+      min-height: 560px;
+      border-radius: 24px;
+      overflow: hidden;
+      border: 1px solid rgba(255,255,255,0.08);
+      background:
+        linear-gradient(180deg, rgba(0,0,0,0.15), rgba(0,0,0,0.25)),
+        url('https://images.unsplash.com/photo-1574717024653-61fd2cf4d44d?auto=format&fit=crop&w=1200&q=80') center/cover;
+      display: flex;
+      align-items: flex-end;
+    }
+
+    .preview-overlay {
+      width: 100%;
+      padding: 24px;
+      background: linear-gradient(180deg, rgba(6,6,7,0) 0%, rgba(6,6,7,0.88) 72%);
+    }
+
+    .preview-badge {
+      display: inline-flex;
+      margin-bottom: 14px;
+      padding: 8px 12px;
+      border-radius: 999px;
+      background: rgba(255,255,255,0.08);
+      border: 1px solid rgba(255,255,255,0.1);
+      color: #f3e1bc;
+      font-size: 0.84rem;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+    }
+
+    .preview-overlay h3 {
+      font-family: Manrope, sans-serif;
+      font-size: 1.7rem;
+      margin-bottom: 8px;
+    }
+
+    .preview-overlay p {
+      color: var(--muted);
+      max-width: 420px;
+    }
+
+    .panel-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 20px;
+      margin-top: 34px;
+    }
+
+    .panel {
+      padding: 28px;
+      border-radius: var(--radius-lg);
+      background: linear-gradient(180deg, rgba(255,255,255,0.045), rgba(255,255,255,0.02));
+      border: 1px solid var(--line);
+      box-shadow: var(--shadow);
+    }
+
+    .panel h3 {
+      font-family: Manrope, sans-serif;
+      font-size: 1.2rem;
+      margin-bottom: 12px;
+    }
+
+    .panel p {
+      color: var(--muted);
+    }
+
+    .services-grid {
+      display: grid;
+      grid-template-columns: 1.2fr 0.8fr;
+      gap: 24px;
+      align-items: start;
+      margin-top: 40px;
+    }
+
+    .service-list {
+      display: grid;
+      gap: 18px;
+    }
+
+    .service-item {
+      padding: 24px;
+      border-radius: var(--radius-lg);
+      border: 1px solid var(--line);
+      background: linear-gradient(180deg, rgba(255,255,255,0.045), rgba(255,255,255,0.02));
+    }
+
+    .service-item h3 {
+      font-family: Manrope, sans-serif;
+      font-size: 1.3rem;
+      margin-bottom: 8px;
+    }
+
+    .service-item p {
+      color: var(--muted);
+      margin-bottom: 10px;
+    }
+
+    .service-meta {
+      color: #e7c98e;
+      font-size: 0.93rem;
+    }
+
+    .side-card {
+      padding: 28px;
+      border-radius: 26px;
+      background: linear-gradient(180deg, rgba(214,176,107,0.10), rgba(255,255,255,0.03));
+      border: 1px solid rgba(214,176,107,0.18);
+      position: sticky;
+      top: 108px;
+    }
+
+    .side-card h3 {
+      font-family: Manrope, sans-serif;
+      font-size: 1.4rem;
+      margin-bottom: 14px;
+    }
+
+    .side-card p,
+    .side-card li {
+      color: var(--muted);
+    }
+
+    .side-card ul {
+      list-style: none;
+      display: grid;
+      gap: 12px;
+      margin: 18px 0 24px;
+    }
+
+    .side-card li::before {
+      content: "•";
+      color: var(--gold);
+      margin-right: 10px;
+    }
+
+    .cases-grid {
+      display: grid;
+      gap: 16px;
+      margin-top: 34px;
+    }
+
+    .case-card {
+      display: grid;
+      grid-template-columns: minmax(0, 1.02fr) minmax(340px, 0.98fr);
+      gap: 0;
+      align-items: start;
+      border-radius: 30px;
+      overflow: hidden;
+      border: 1px solid var(--line);
+      background: linear-gradient(180deg, rgba(255,255,255,0.045), rgba(255,255,255,0.02));
+      box-shadow: var(--shadow);
+    }
+
+    .case-visual {
+      position: relative;
+      padding: 18px;
+      display: flex;
+      align-items: flex-start;
+      justify-content: center;
+      background: transparent;
+      border-right: 1px solid rgba(255,255,255,0.07);
+      overflow: hidden;
+    }
+
+    .case-video-main {
+      position: relative;
+      width: 100%;
+      max-width: 100%;
+      aspect-ratio: 16 / 9;
+      margin: 0;
+      background: rgba(0,0,0,0.24);
+      border-radius: 18px;
+      overflow: hidden;
+      border: 1px solid rgba(255,255,255,0.08);
+      flex: 0 0 auto;
+      box-shadow: 0 12px 28px rgba(0,0,0,0.24);
+    }
+
+    .case-video-main iframe {
+      width: 100%;
+      height: 100%;
+      position: absolute;
+      inset: 0;
+      border: 0;
+      display: block;
+    }
+
+    .case-tag {
+      display: inline-flex;
+      align-self: start;
+      padding: 6px 10px;
+      border-radius: 999px;
+      background: rgba(214,176,107,0.12);
+      border: 1px solid rgba(214,176,107,0.22);
+      color: #ecd6ae;
+      font-size: 0.74rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      box-shadow: inset 0 1px 0 rgba(255,255,255,0.04);
+    }
+
+    .case-media {
+      display: grid;
+      gap: 6px;
+    }
+
+    .case-header {
+      display: grid;
+      gap: 4px;
+    }
+
+    .case-header h3 {
+      font-family: Manrope, sans-serif;
+      font-size: 1.22rem;
+      line-height: 0.98;
+      letter-spacing: -0.03em;
+      max-width: 12ch;
+    }
+
+    .case-content {
+      padding: 16px 18px 14px;
+      display: grid;
+      gap: 8px;
+      align-content: start;
+      background: transparent;
+    }
+
+    .case-description {
+      color: #cfc7be;
+      font-size: 0.84rem;
+      line-height: 1.32;
+      max-width: 34ch;
+    }
+
+    .case-points {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 5px;
+    }
+
+    .case-point {
+      padding: 8px 10px;
+      border-radius: 12px;
+      background: linear-gradient(180deg, rgba(255,255,255,0.035), rgba(255,255,255,0.018));
+      border: 1px solid rgba(255,255,255,0.07);
+    }
+
+    .case-point strong {
+      display: block;
+      font-size: 0.58rem;
+      color: #e7c98e;
+      text-transform: uppercase;
+      letter-spacing: 0.14em;
+      margin-bottom: 4px;
+    }
+
+    .case-point span {
+      color: var(--text);
+      font-weight: 500;
+      font-size: 0.82rem;
+      line-height: 1.26;
+    }
+
+    .case-note {
+      padding-top: 4px;
+      border-top: 1px solid rgba(255,255,255,0.08);
+      color: var(--white-soft);
+      font-size: 0.78rem;
+      line-height: 1.28;
+      max-width: 34ch;
+    }
+
+    .workflow {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 18px;
+      margin-top: 38px;
+    }
+
+    .workflow-step {
+      padding: 24px;
+      border-radius: 24px;
+      background: linear-gradient(180deg, rgba(255,255,255,0.04), rgba(255,255,255,0.02));
+      border: 1px solid var(--line);
+    }
+
+    .workflow-step span {
+      display: inline-flex;
+      width: 42px;
+      height: 42px;
+      border-radius: 50%;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 14px;
+      background: var(--gold-soft);
+      border: 1px solid rgba(214,176,107,0.22);
+      color: #f0dcb6;
+      font-weight: 700;
+    }
+
+    .workflow-step h3 {
+      font-family: Manrope, sans-serif;
+      font-size: 1.1rem;
+      margin-bottom: 8px;
+    }
+
+    .workflow-step p {
+      color: var(--muted);
+      font-size: 0.95rem;
+    }
+
+    .quote-card {
+      margin-top: 36px;
+      padding: 34px;
+      border-radius: 28px;
+      background: linear-gradient(180deg, rgba(214,176,107,0.12), rgba(255,255,255,0.02));
+      border: 1px solid rgba(214,176,107,0.18);
+      box-shadow: var(--shadow);
+    }
+
+    .quote-card blockquote {
+      font-family: Manrope, sans-serif;
+      font-size: clamp(1.4rem, 3vw, 2.3rem);
+      line-height: 1.2;
+      max-width: 920px;
+      margin-bottom: 14px;
+    }
+
+    .quote-card p {
+      color: var(--muted);
+    }
+
+    .contact-card {
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 30px;
+      align-items: center;
+      padding: 38px;
+      border-radius: 34px;
+      background: linear-gradient(135deg, rgba(214,176,107,0.16), rgba(255,255,255,0.04));
+      border: 1px solid rgba(214,176,107,0.16);
+      box-shadow: var(--shadow);
+    }
+
+    .contact-card h2 {
+      font-family: Manrope, sans-serif;
+      font-size: clamp(2rem, 3.5vw, 3.4rem);
+      line-height: 1;
+      margin-bottom: 12px;
+    }
+
+    .contact-card p {
+      color: var(--muted);
+      max-width: 720px;
+    }
+
+    .contact-links {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-top: 22px;
+    }
+
+    .site-footer {
+      padding: 30px 0 50px;
+      color: var(--muted);
+      text-align: center;
+    }
+
+    @media (max-width: 1120px) {
+      .hero-grid,
+      .services-grid,
+      .contact-card,
+      .case-card {
+        grid-template-columns: 1fr;
+      }
+
+      .workflow,
+      .panel-grid,
+      .case-points {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+
+      .case-visual {
+        padding: 18px 18px 0;
+        border-right: 0;
+        border-bottom: 0;
+      }
+
+      .case-content {
+        padding: 14px 16px 14px;
+      }
+
+      .case-video-main {
+        max-width: 100%;
+      }
+
+      .side-card {
+        position: static;
+      }
+    }
+
+    @media (max-width: 760px) {
+      .section {
+        padding: 80px 0;
+      }
+
+      .nav {
+        position: absolute;
+        top: 82px;
+        left: 16px;
+        right: 16px;
+        display: none;
+        flex-direction: column;
+        align-items: flex-start;
+        padding: 18px;
+        border-radius: 18px;
+        background: rgba(8,8,9,0.96);
+        border: 1px solid var(--line);
+      }
+
+      .nav.open {
+        display: flex;
+      }
+
+      .menu-btn {
+        display: inline-flex;
+      }
+
+      .site-header__inner > .btn {
+        display: none;
+      }
+
+      .hero-title {
+        font-size: 2.8rem;
+      }
+
+      .hero-metrics,
+      .workflow,
+      .panel-grid,
+      .case-points {
+        grid-template-columns: 1fr;
+      }
+
+      .preview-frame {
+        min-height: 420px;
+      }
+
+      .contact-card {
+        padding: 28px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header class="site-header">
+    <div class="container site-header__inner">
+      <a href="#home" class="logo">
+        <strong>Денис Квашнин</strong>
+        <span>Режиссёр монтажа</span>
+      </a>
+
+      <nav class="nav" id="nav">
+        <a href="#about">Обо мне</a>
+        <a href="#services">Направления</a>
+        <a href="#cases">Кейсы</a>
+        <a href="#workflow">Процесс</a>
+        <a href="#contact">Контакты</a>
+      </nav>
+
+      <button class="menu-btn" id="menuBtn">Меню</button>
+      <a href="#contact" class="btn btn-gold">Обсудить проект</a>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero" id="home">
+      <div class="container hero-grid">
+        <div class="hero-copy">
+          <div class="eyebrow">Монтаж, который удерживает внимание и усиливает героя</div>
+          <h1 class="hero-title">
+            Режиссёр монтажа для
+            <span class="accent">интервью, подкастов и YouTube-проектов</span>
+          </h1>
+          <p class="hero-text">
+            Собираю выпуск в сильную драматургию: выстраиваю ритм, управляю вниманием зрителя,
+            очищаю материал от лишнего и превращаю длинную съёмку в точную историю, которую досматривают.
+          </p>
+
+          <div class="hero-actions">
+            <a href="#cases" class="btn btn-gold">Смотреть кейсы</a>
+            <a href="#contact" class="btn btn-dark">Заказать монтаж</a>
+          </div>
+        </div>
+
+        <div class="hero-card">
+          <div class="preview-frame">
+            <div class="preview-overlay">
+              <h3>Монтаж как режиссура восприятия</h3>
+              <p>Смысл, интонация, пауза, напряжение, темп — всё работает на образ героя и удержание аудитории.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="container panel-grid">
+        <div class="panel">
+          <h3>Интервью</h3>
+          <p>Собираю разговор в цельную историю: подчёркиваю характер героя, выстраиваю драматургию и сохраняю естественность подачи.</p>
+        </div>
+        <div class="panel">
+          <h3>Подкасты</h3>
+          <p>Делаю спокойный, чистый и дорогой монтаж: ритм, перебивки, акценты, титры и ощущение профессионального студийного продукта.</p>
+        </div>
+        <div class="panel">
+          <h3>YouTube</h3>
+          <p>Адаптирую монтаж под платформу: удержание внимания, плотность смысла, динамика внутри длинного формата и сильное начало выпуска.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="about">
+      <div class="container">
+        <div class="section-label">Позиционирование</div>
+        <h2 class="section-title">Не просто собираю таймлайн — режиссирую то, как зритель проживает выпуск</h2>
+        <p class="section-subtitle">
+          Моя задача — сделать материал собранным, точным и статусным. Чтобы интервью звучало глубже, подкаст смотрелся дороже,
+          а YouTube-выпуск удерживал внимание без ощущения перегруженности.
+        </p>
+
+        <div class="services-grid">
+          <div class="service-list">
+            <div class="service-item">
+              <h3>Драматургия и ритм</h3>
+              <p>Определяю структуру эпизода, убираю провисания, усиливаю вход в тему, развиваю ключевые мысли и собираю сильный финал.</p>
+              <div class="service-meta">Что получает клиент: выпуск, который легче смотреть и проще досматривать до конца.</div>
+            </div>
+
+            <div class="service-item">
+              <h3>Премиальная чистота монтажа</h3>
+              <p>Работаю с дыханием кадра, паузами, смысловыми склейками, реакциями, перебивками, графикой и визуальной дисциплиной.</p>
+              <div class="service-meta">Что получает клиент: аккуратный и дорогой визуальный язык без хаоса и случайных решений.</div>
+            </div>
+
+            <div class="service-item">
+              <h3>Монтаж под задачу проекта</h3>
+              <p>Один и тот же исходник можно собрать по-разному: под личный бренд, медиа, студию, экспертный канал или разговорный формат.</p>
+              <div class="service-meta">Что получает клиент: монтаж, который работает именно на его бренд и аудиторию.</div>
+            </div>
+          </div>
+
+          <aside class="side-card">
+            <h3>С чем работаю</h3>
+            <p>Включаюсь в проекты, где важны вкус, интонация и уважение к материалу.</p>
+            <ul>
+              <li>Интервью с героями, экспертами и публичными людьми</li>
+              <li>Видео- и аудиоподкасты с визуальной упаковкой</li>
+              <li>YouTube-выпуски, которым нужен уровень выше стандартного монтажа</li>
+              <li>Короткие выжимки и промо-нарезки из длинного контента</li>
+            </ul>
+            <a href="#contact" class="btn btn-gold">Связаться</a>
+          </aside>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="cases">
+      <div class="container">
+        <div class="section-label">Три кейса</div>
+        <h2 class="section-title">Кейсы, в которых монтаж влияет не только на картинку, но и на восприятие бренда</h2>
+        <p class="section-subtitle">
+          Ниже — примеры того, как я подхожу к разным форматам: через структуру, ритм, эмоциональный акцент и ощущение уровня проекта.
+        </p>
+
+        <div class="cases-grid">
+          <article class="case-card">
+            <div class="case-visual">
+              <div class="case-video-main">
+                <iframe src="https://www.youtube.com/embed/Iu869G3-bkw" title="Интервью про Антарктиду" loading="lazy" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+              </div>
+            </div>
+            <div class="case-content">
+              <div class="case-media">
+                <div class="case-tag">Кейс 01 / Интервью</div>
+                <div class="case-header">
+                  <h3>Интервью про Антарктиду</h3>
+                </div>
+              </div>
+              <p class="case-description">Плотная сборка без потери глубины героя.</p>
+              <div class="case-points">
+                <div class="case-point">
+                  <strong>Задача</strong>
+                  <span>Сделать разговор плотнее и статуснее без потери глубины</span>
+                </div>
+                <div class="case-point">
+                  <strong>Решение</strong>
+                  <span>Новая драматургическая сборка, реакции, перебивки, усиление ключевых тезисов</span>
+                </div>
+                <div class="case-point">
+                  <strong>Результат</strong>
+                  <span>Интервью воспринимается как зрелый медийный продукт, а герой — убедительнее</span>
+                </div>
+              </div>
+              <div class="case-note">Точный монтаж. Собранная подача.</div>
+            </div>
+          </article>
+
+          <article class="case-card">
+            <div class="case-visual">
+              <div class="case-video-main">
+                <iframe src="https://www.youtube.com/embed/6vCH6cfPi88" title="Конференция YandexGPT" loading="lazy" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+              </div>
+            </div>
+            <div class="case-content">
+              <div class="case-media">
+                <div class="case-tag">Кейс 02 / Подкаст</div>
+                <div class="case-header">
+                  <h3>Конференция YandexGPT</h3>
+                </div>
+              </div>
+              <p class="case-description">Студийная подача, чище ритм, сильнее качество.</p>
+              <div class="case-points">
+                <div class="case-point">
+                  <strong>Задача</strong>
+                  <span>Сделать выпуск премиальным и комфортным для длинного просмотра</span>
+                </div>
+                <div class="case-point">
+                  <strong>Решение</strong>
+                  <span>Сдержанный монтаж, аккуратные титры, ритмичные смены планов, работа с паузами</span>
+                </div>
+                <div class="case-point">
+                  <strong>Результат</strong>
+                  <span>Подкаст выглядит дороже, а разговор держит внимание без искусственной суеты</span>
+                </div>
+              </div>
+              <div class="case-note">Точный монтаж. Собранная подача.</div>
+            </div>
+          </article>
+
+          <article class="case-card">
+            <div class="case-visual">
+              <div class="case-video-main">
+                <iframe src="https://www.youtube.com/embed/H3ftR44LvvQ" title="YouTube-выпуск с экспертной подачей" loading="lazy" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+              </div>
+            </div>
+            <div class="case-content">
+              <div class="case-media">
+                <div class="case-tag">Кейс 03 / YouTube</div>
+                <div class="case-header">
+                  <h3>YouTube-выпуск с экспертной подачей</h3>
+                </div>
+              </div>
+              <p class="case-description">Сильнее старт, чище темп, выше удержание.</p>
+              <div class="case-points">
+                <div class="case-point">
+                  <strong>Задача</strong>
+                  <span>Усилить старт выпуска и повысить вовлечённость по ходу просмотра</span>
+                </div>
+                <div class="case-point">
+                  <strong>Решение</strong>
+                  <span>Хук в начале, плотная сборка первых минут, визуальные акценты и смысловые переходы</span>
+                </div>
+                <div class="case-point">
+                  <strong>Результат</strong>
+                  <span>Видео смотрится собраннее, живее и профессиональнее, сохраняя экспертность автора</span>
+                </div>
+              </div>
+              <div class="case-note">Точный монтаж. Собранная подача.</div>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="workflow">
+      <div class="container">
+        <div class="section-label">Как строится работа</div>
+        <h2 class="section-title">Понятный процесс — чтобы клиент видел контроль, а не хаос</h2>
+        <p class="section-subtitle">
+          Работаю спокойно, структурно и без лишней суеты: от получения исходников до финальной версии, готовой к публикации.
+        </p>
+
+        <div class="workflow">
+          <div class="workflow-step">
+            <span>01</span>
+            <h3>Бриф и задача</h3>
+            <p>Определяем формат, тон проекта, целевую аудиторию, длину выпуска и желаемое впечатление от монтажа.</p>
+          </div>
+          <div class="workflow-step">
+            <span>02</span>
+            <h3>Отбор и структура</h3>
+            <p>Просматриваю материал, отмечаю сильные фрагменты, собираю драматургическую логику и убираю лишнее.</p>
+          </div>
+          <div class="workflow-step">
+            <span>03</span>
+            <h3>Сборка и оформление</h3>
+            <p>Делаю основную монтажную версию: ритм, акценты, титры, перебивки, графика и подача в нужном стиле.</p>
+          </div>
+          <div class="workflow-step">
+            <span>04</span>
+            <h3>Финализация</h3>
+            <p>Вношу правки, подготавливаю мастер и при необходимости версии под YouTube, соцсети и промо-нарезки.</p>
+          </div>
+        </div>
+
+        <div class="quote-card">
+          <blockquote>Хороший монтаж не отвлекает на себя. Он создаёт ощущение, что выпуск просто работает — глубоко, точно и на высоком уровне.</blockquote>
+          <p>Именно это ощущение я стараюсь дать каждому проекту.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="contact">
+      <div class="container">
+        <div class="contact-card">
+          <div>
+            <div class="section-label">Контакт</div>
+            <h2>Готов собрать для вас сильный выпуск</h2>
+            <p>
+              Если вам нужен монтаж интервью, подкаста или YouTube-проекта с премиальной подачей,
+              напишите мне. Обсудим формат, задачу и тот уровень результата, который вы хотите получить.
+            </p>
+
+            <div class="contact-links">
+              <a class="btn btn-gold" href="mailto:deniskvashnin97@yandex.ru">deniskvashnin97@yandex.ru</a>
+              <a class="btn btn-dark" href="https://t.me/DenisKvashnin" target="_blank" rel="noopener noreferrer">Telegram</a>
+            </div>
+          </div>
+
+          <a href="#home" class="btn btn-dark">Наверх</a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      © <span id="year"></span> Денис Квашнин — режиссёр монтажа. Портфолио / интервью / подкасты / YouTube.
+    </div>
+  </footer>
+
+  <script>
+    const menuBtn = document.getElementById('menuBtn');
+    const nav = document.getElementById('nav');
+    const year = document.getElementById('year');
+
+    if (menuBtn) {
+      menuBtn.addEventListener('click', () => {
+        nav.classList.toggle('open');
+      });
+    }
+
+    document.querySelectorAll('.nav a').forEach(link => {
+      link.addEventListener('click', () => nav.classList.remove('open'));
+    });
+
+    year.textContent = new Date().getFullYear();
+  </script>
+</body>
+</html>
